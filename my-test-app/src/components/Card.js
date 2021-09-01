@@ -1,19 +1,18 @@
-// Accepts a Card object as a prop
-
-// Set up an import for useState
 import { useState } from 'react';
+import Button from './Button';
 
 function Card({ title, content="Add Some Content Here"}) {
-    // props = { title: "My Title" }
-    // props.title => "My Title"
-    
-    // Create a state to handle whether the card is visible or not
-    const [ isAdded, setAdded ] = useState(false);
-    const [ isLiked, setLiked ] = useState(false);
+    // States
+    // const [ VARIABLE NAME OF STATE, SETTER FUNCTION ] = useState(DEFAULT VALUE OF STATE)
 
-    function handleVisibility() {
-        setAdded(!isAdded);
-    }
+    // Create a state to keep track of whether Card has been added to Cart
+    // const [ isAdded, setAdded ] = useState(false); 
+
+    // Create a state to keep track of Likes
+    // const [ isLiked, setLiked ] = useState(false); 
+
+    // Create a State to handle Card info visibility
+    const [ isVisible, setVisibility ] = useState(true);
 
     const ColoredLine = ({ color }) => (
         <hr
@@ -26,38 +25,50 @@ function Card({ title, content="Add Some Content Here"}) {
         />
     );
 
-    const cardsVisible = isAdded ? <h2>Added To Cart</h2> : setCardContent();
-
-    function setCardContent() {
+    // Abstract out Card Details into JS Function returning JSX
+    function showCardDetails() {
         return (
-            <div>
+            <>
                 <h2 className="component-name">Card Component</h2>
                 <h1>{title}</h1>
                 <ColoredLine color="black" />
-            </div>
-        );
+                <p>{content}</p>
+            </>
+        )
+    }
+
+    // Create a Callback Function to contain setVisiblity 
+    function toggleVisibility() {
+      setVisibility(isVisible => !isVisible);
     }
 
     return (
         <div className="card">
-        
-            {cardsVisible}
+            {/* TERNARY OPERATOR */}
+            {/* CONDITION ? IF TRUE : IF FALSE */}
 
-            <button className="button" onClick={() => setAdded(!isAdded)}>
-                {isAdded ? "Remove From Cart" : "Add To Cart"} 
-            </button>
+            {/* { isAdded ? <h2>Added to Cart</h2> : showCardDetails } */}
+
+            {/* Break Out Activity #2: Create a <Button /> Component to enable each Button to 
+            manage its own isToggled state. 💡 To configure each <Button />, try passing a 
+            “name” prop from Card.js */}
+
+            { isVisible ? showCardDetails() : <h2>Added to Cart</h2>  }
+
+            <Button name="cart" toggleVisibility={toggleVisibility} />
             <br />
-            <button className="button" onClick={() => setLiked(!isLiked)}>
-                {isLiked ? "❤️" : "♡"}
-            </button>
+            <Button name="like"/>
 
             {/* Break Out Activity #1: Modify the onClick behavior of our Add to Cart <button> 
             to render only an H2 element saying “Added to Cart” in place of Card details. */}
 
-            {/* Break Out Activity #2: Create a <Button /> Component to enable each Button to 
-            manage its own isToggled state. 💡 To configure each <Button />, try passing a “name” 
-            prop from Card.js */}
-
+            {/* <button className="button" onClick={() => setAdded(!isAdded)}>
+                { isAdded ? "Remove From Cart" : "Add To Cart" }
+            </button>
+            <br />
+            <button className="button" onClick={() => setLiked(!isLiked)}>
+                { isLiked ? "❤️" : "♡" }
+            </button> */}
         </div>
     );
 }

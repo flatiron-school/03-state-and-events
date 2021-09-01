@@ -18,7 +18,7 @@ function CardList({ cards, handleAddCard }) {
                     />
                 );
             })}
-            <button>Add New Card</button>
+            <button onClick={handleAddCard}>Add New Card</button>
         </div>
     );
 }

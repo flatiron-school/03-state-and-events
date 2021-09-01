@@ -43,11 +43,13 @@ function Card({ title, content="Add Some Content Here"}) {
         
             {cardsVisible}
 
-            <button className="button" onClick={handleVisibility}>
-                    {isAdded ? "Remove From Cart" : "Add To Cart"} 
+            <button className="button" onClick={() => setAdded(!isAdded)}>
+                {isAdded ? "Remove From Cart" : "Add To Cart"} 
             </button>
             <br />
-            <button className="button">♡ | ❤️</button>
+            <button className="button" onClick={() => setLiked(!isLiked)}>
+                {isLiked ? "❤️" : "♡"}
+            </button>
 
             {/* Break Out Activity #1: Modify the onClick behavior of our Add to Cart <button> 
             to render only an H2 element saying “Added to Cart” in place of Card details. */}

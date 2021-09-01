@@ -1,6 +1,7 @@
 // Accepts a Card object as a prop
 
 // Set up an import for useState
+import { useState } from 'react';
 
 function Card({ title, content="Add Some Content Here"}) {
     // props = { title: "My Title" }
@@ -8,6 +9,10 @@ function Card({ title, content="Add Some Content Here"}) {
     
     // Create a state to handle whether the card is visible or not
     const [ isVisible, setVisibility ] = useState(true);
+
+    function handleVisibility() {
+        setVisibility(!isVisible);
+    }
 
     const ColoredLine = ({ color }) => (
         <hr
@@ -20,25 +25,36 @@ function Card({ title, content="Add Some Content Here"}) {
         />
     );
 
+    const cardsVisible = isVisible ? setCardContent() : <h2>Added To Cart</h2>
+
+    function setCardContent() {
+        return (
+            <div>
+                <h2 className="component-name">Card Component</h2>
+                <h1>{title}</h1>
+                <ColoredLine color="black" />
+            </div>
+        );
+    }
+
     return (
         <div className="card">
-            <h2 className="component-name">Card Component</h2>
-            <h1>{title}</h1>
-            <ColoredLine color="black" />
-            <p>{content}</p>
+        
+            {cardsVisible}
+
+            <button className="button" onClick={handleVisibility}>
+                    Add To Cart | Remove From Cart
+            </button>
+            <br />
+            <button className="button">♡ | ❤️</button>
 
             {/* Break Out Activity #1: Modify the onClick behavior of our Add to Cart <button> 
             to render only an H2 element saying “Added to Cart” in place of Card details. */}
-
-            
 
             {/* Break Out Activity #2: Create a <Button /> Component to enable each Button to 
             manage its own isToggled state. 💡 To configure each <Button />, try passing a “name” 
             prop from Card.js */}
 
-            <button className="button" onClick={}>Add To Cart | Remove From Cart</button>
-            <br />
-            <button className="button">♡ | ❤️</button>
         </div>
     );
 }

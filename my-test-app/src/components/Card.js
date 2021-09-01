@@ -8,10 +8,11 @@ function Card({ title, content="Add Some Content Here"}) {
     // props.title => "My Title"
     
     // Create a state to handle whether the card is visible or not
-    const [ isVisible, setVisibility ] = useState(true);
+    const [ isAdded, setAdded ] = useState(false);
+    const [ isLiked, setLiked ] = useState(false);
 
     function handleVisibility() {
-        setVisibility(!isVisible);
+        setAdded(!isAdded);
     }
 
     const ColoredLine = ({ color }) => (
@@ -25,7 +26,7 @@ function Card({ title, content="Add Some Content Here"}) {
         />
     );
 
-    const cardsVisible = isVisible ? setCardContent() : <h2>Added To Cart</h2>
+    const cardsVisible = isAdded ? <h2>Added To Cart</h2> : setCardContent();
 
     function setCardContent() {
         return (
@@ -43,7 +44,7 @@ function Card({ title, content="Add Some Content Here"}) {
             {cardsVisible}
 
             <button className="button" onClick={handleVisibility}>
-                    Add To Cart | Remove From Cart
+                    {isAdded ? "Remove From Cart" : "Add To Cart"} 
             </button>
             <br />
             <button className="button">♡ | ❤️</button>

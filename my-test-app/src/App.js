@@ -1,3 +1,6 @@
+// Import our useState Hook
+import { useState } from 'react';
+
 import './App.css';
 
 // Component Imports
@@ -8,7 +11,12 @@ import CardList from './components/CardList';
 // Data
 import cardData from './cards';
 
+// What advantages does adding a new state "cards"
+// offer us?
+
 function App() {
+  const [ cards, setCards ] = useState(cardData);
+  
   return (
     <div className="App">
       {/* NavBar Component */}
@@ -22,7 +30,7 @@ function App() {
 
       {/* CardList Component */}
       <CardList 
-        cards={cardData} 
+        cards={cards} 
       />
     </div>
   );
